@@ -24,14 +24,12 @@ function createGallery(galleryItems) {
 
 
 galleryUlRef.addEventListener('click', onClick);
-     
 
 function onClick(event) {
   event.preventDefault();
-  if (!event.target.classList.contains("gallery__image")) {
+    if (!event.target.classList.contains("gallery__image")) {
     return
-  }
-
+    }
   const instance = basicLightbox.create(
   `<div class="modal">
         <img width="1110" height="580" src="${event.target.dataset.source}">
@@ -43,14 +41,31 @@ function onClick(event) {
         window.removeEventListener('keydown', onModalClose)
       }
   })
-  instance.show();
 
   function onModalClose(event) {
-  if (event.code === "Escape") {
+    if (event.code === "Escape") {
     instance.close()
+    } 
   }
+  
+  instance.show();
+
+  const div = document.querySelector('.modal')
+  div.addEventListener('click', onCloseModalClick);
+
+  function onCloseModalClick() {
+    if (instance.visible()) {
+    instance.close()
+    }
+  }  
 }
-}
+
+
+
+
+  
+
+
 
 
 
